@@ -18,13 +18,29 @@ function startTime() {
     document.getElementById('hour').innerHTML = h;
     document.getElementById('min').innerHTML = m;
     document.getElementById('sec').innerHTML = s;
-    document.getElementById('r-day').innerHTML = d;
-    document.getElementById('r-hour').innerHTML = h;
-    document.getElementById('r-min').innerHTML = m;
-    document.getElementById('r-sec').innerHTML = s;
     t = setTimeout('startTime()', 1000);
 }
 function checkTime(i) {
     if (i < 10) { i = "0" + i }
     return i
+}
+
+calPercentage();
+function calPercentage() {
+    var today = new Date();
+    var lastday = new Date("Dec 24, 2018 00:00:00");
+    var startday = new Date("Aug 25, 2018 00:00:00");
+    var timeInterval = today - startday;
+    var totaltimeInterval = lastday - startday;
+    var d1 = Math.floor((timeInterval/(24 * 3600 * 1000)));
+    var d2 = Math.floor((totaltimeInterval/(24 * 3600 * 1000)));
+    
+    function checkTimeMax(i) {
+        if (i > 1) { i = 1 }
+        return i
+    }
+    var p = d1/d2;
+    p = checkTimeMax(p) *100;
+    p = Math.floor(p)
+    $('#percentage').text(p);
 }
